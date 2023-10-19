@@ -82,7 +82,7 @@ jobs:
           name: carpetas
           command: |
             ls
-            cd lambda
+            cd host
             ls
 
 workflows:
