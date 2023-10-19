@@ -37,7 +37,9 @@ jobs:
       - dagger-install
       - run:
           name: Ver Directorios 
-          command: dir
+          command: |
+            cd host
+            dir
       - run:
           name: Run Dagger pipeline
           command: dagger run --progress plain python ./ci/deploy.py
