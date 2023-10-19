@@ -74,6 +74,10 @@ jobs:
       - image: cimg/base:2022.03
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - attach_workspace:
+          at: ~/project
       - run:
           name: carpetas
           command: |
