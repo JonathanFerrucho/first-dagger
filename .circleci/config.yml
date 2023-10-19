@@ -54,7 +54,7 @@ jobs:
           root: ~/project
           paths:
             - "*"
-                  
+
   deploy-lambda:
     docker:
       - image: cimg/python:3.10
@@ -68,6 +68,16 @@ jobs:
       - run:
           name: Run Dagger pipeline
           command: dagger run --progress plain python ./ci/deploy-lambda.py
+  
+    ver-directorio:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+      - run:
+          name: ver directorio
+          command: | 
+            dir
 workflows:
   dagger:
     jobs:
@@ -76,6 +86,7 @@ workflows:
       #     requires:
       #       - build
       - build-lambda
+      - ver-directorio:
       # - deploy-lambda:
       #   requires:
       #     -build-lambda
