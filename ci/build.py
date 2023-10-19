@@ -14,6 +14,7 @@ async def main():
         # get reference to source code directory
         source = client.host().directory(".", include=["app"]).directory("app")
         
+        print("get app")
         app = (
             client
             .container()
@@ -23,11 +24,13 @@ async def main():
             .with_workdir("/app")
         )
 
+        print("get build app")
         build = (
             app
             .with_exec(["gradle", "clean", "build"])            
         )
 
+        print("export jar app")
         export = (
             build
             .directory(".")
