@@ -50,11 +50,6 @@ jobs:
           at: ~/project
       - dagger-install
       - run:
-          name: Ver Directorios 
-          command: |
-            cd host
-            dir
-      - run:
           name: Run Dagger pipeline
           command: dagger run --progress plain python ./ci/deploy.py
 workflows:
