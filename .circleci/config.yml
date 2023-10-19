@@ -78,6 +78,7 @@ jobs:
           command: |
             echo hola
             dir
+            ls
 
 workflows:
   dagger:
