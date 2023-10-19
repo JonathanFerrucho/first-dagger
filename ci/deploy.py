@@ -17,6 +17,7 @@ async def main():
             .stdout()
         )
 
+    print("out")
     print(out)
 
 
