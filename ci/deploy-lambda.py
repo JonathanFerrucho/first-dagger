@@ -44,7 +44,6 @@ async def main():
             # .with_exec(
             #     ["pip", "install", "--target", "./packages", "-r", "requirements-dod.txt"]
             # )
-            # .with_workdir("/lambda/packages")
             .with_exec(["zip", "-r", "./function.zip", "."])
             .with_workdir("/lambda")
             .with_exec(["zip", "function.zip", "handler.py"])
@@ -78,14 +77,11 @@ async def main():
                     "fileb:///tmp/function.zip",
                 ]
             )
-            .with_exec(
-                ["lambda", "get-function-url-config", "--function-name", "create-jira-issue"]
-            )
             .stdout()
         )
         data = json.loads(response)
 
-    print(f"Function updated at: {data['FunctionUrl']}")
+    print(f"Function updated at: {data}")
 
 
 anyio.run(main)
