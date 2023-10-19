@@ -75,7 +75,8 @@ jobs:
     steps:
        - run:
           name: hola
-          command: echo hola
+          command: |
+          echo hola
 
 workflows:
   dagger:
