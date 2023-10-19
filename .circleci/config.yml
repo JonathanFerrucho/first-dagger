@@ -76,7 +76,7 @@ jobs:
        - run:
           name: hola
           command: |
-          echo hola
+            echo hola
 
 workflows:
   dagger:
