@@ -12,7 +12,7 @@ commands:
 jobs:
   build:
     docker:
-      - image: cimg/python:3.11
+      - image: cimg/python:3.10
     steps:
       - checkout
       - setup_remote_docker:
@@ -28,7 +28,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/python:3.11
+      - image: cimg/python:3.10
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
@@ -43,6 +43,7 @@ jobs:
     docker:
       - image: cimg/python:3.10
     steps:
+      - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - attach_workspace:
