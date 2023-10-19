@@ -70,11 +70,11 @@ jobs:
           command: dagger run --progress plain python ./ci/deploy-lambda.py
   
     ver-directorio:
-    docker:
-      - image: cimg/python:3.10
-    steps:
-      - checkout
-      - run:
+      docker:
+        - image: cimg/python:3.10
+      steps:
+        - checkout
+        - run:
           name: ver directorio
           command: | 
             dir
@@ -86,7 +86,7 @@ workflows:
       #     requires:
       #       - build
       - build-lambda
-      - ver-directorio:
+      - ver-directorio
       # - deploy-lambda:
       #   requires:
       #     -build-lambda
