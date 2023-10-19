@@ -84,7 +84,7 @@ workflows:
       #     requires:
       #       - build
       - build-lambda
-      - mostrar-directorio
+      - mostrar-directorio:
           requires:
             -build-lambda
       # - deploy-lambda:
