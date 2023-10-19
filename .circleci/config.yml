@@ -73,7 +73,8 @@ jobs:
     docker:
       - image: cimg/base:2022.03
     steps:
-      - run: echo holas
+      - run: |
+        echo hola
 
 workflows:
   dagger:
