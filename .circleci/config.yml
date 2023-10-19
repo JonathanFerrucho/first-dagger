@@ -69,16 +69,12 @@ jobs:
           name: Run Dagger pipeline
           command: dagger run --progress plain python ./ci/deploy-lambda.py
   
-  show:
+  print-a-message:
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/base:2022.03
     steps:
-      - checkout
-      - run:
-        name: ver directorio
-        command: | 
-          dir
-          
+      - run: echo holas
+
 workflows:
   dagger:
     jobs:
@@ -87,7 +83,7 @@ workflows:
       #     requires:
       #       - build
       # - build-lambda
-      - show
+      - print-a-message
       # - deploy-lambda:
       #   requires:
       #     -build-lambda
