@@ -90,8 +90,8 @@ workflows:
       #       - build
       - build-lambda
       - print-a-message:
-        requires:
-          - build-lambda
+          requires:
+            - build-lambda
       # - deploy-lambda:
       #   requires:
       #     -build-lambda
