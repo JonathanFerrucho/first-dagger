@@ -76,7 +76,6 @@ jobs:
        - run:
           name: hola
           command: |
-            echo hola
             dir
             ls
 
