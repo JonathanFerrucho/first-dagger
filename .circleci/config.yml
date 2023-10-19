@@ -75,7 +75,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: hola
+          name: carpetas
           command: |
             ls
             cd lambda
@@ -88,8 +88,10 @@ workflows:
       # - deploy:
       #     requires:
       #       - build
-      # - build-lambda
-      - print-a-message
+      - build-lambda
+      - print-a-message:
+        requires:
+          - build-lambda
       # - deploy-lambda:
       #   requires:
       #     -build-lambda
