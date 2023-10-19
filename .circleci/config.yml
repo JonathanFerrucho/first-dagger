@@ -54,15 +54,7 @@ jobs:
           root: ~/project
           paths:
             - "*"
-  mostrar-directorio:
-    docker:
-      - image: cimg/python:3.10
-    steps:
-      - run:
-          name: Mostrar directorio
-          command: |
-            dir
-      
+                  
   deploy-lambda:
     docker:
       - image: cimg/python:3.10
@@ -84,9 +76,6 @@ workflows:
       #     requires:
       #       - build
       - build-lambda
-      - mostrar-directorio:
-          requires:
-            -build-lambda
       # - deploy-lambda:
       #   requires:
       #     -build-lambda
