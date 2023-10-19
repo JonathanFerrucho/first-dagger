@@ -29,7 +29,7 @@ async def main():
             # )
             .with_exec(["zip", "-r", "./function.zip", "."])
             .with_workdir("/lambda")
-            .with_exec(["zip", "function.zip", "handler.py"])
+            # .with_exec(["zip", "function.zip", "handler.py"])
         )
 
         export = (
