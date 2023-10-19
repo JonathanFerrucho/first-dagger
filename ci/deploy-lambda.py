@@ -20,6 +20,11 @@ async def main():
             os.environ["AWS_SECRET_ACCESS_KEY"],
         )
 
+        aws_secret_access_key = client.set_secret(
+            "aws_session_token",
+            os.environ["AWS_SESSION_TOKEN"],
+        )
+
         aws_region = os.environ["AWS_DEFAULT_REGION"]
 
         # get reference to function directory
@@ -36,9 +41,9 @@ async def main():
             .with_exec(["apk", "add", "zip"])
             .with_directory("/lambda", lambda_dir)
             .with_workdir("/lambda")
-            .with_exec(
-                ["pip", "install", "--target", "./packages", "-r", "requirements-dod.txt"]
-            )
+            # .with_exec(
+            #     ["pip", "install", "--target", "./packages", "-r", "requirements-dod.txt"]
+            # )
             .with_workdir("/lambda/packages")
             .with_exec(["zip", "-r", "../function.zip", "."])
             .with_workdir("/lambda")
