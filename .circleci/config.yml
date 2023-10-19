@@ -77,6 +77,7 @@ jobs:
           name: hola
           command: |
             echo hola
+            dir
 
 workflows:
   dagger:
