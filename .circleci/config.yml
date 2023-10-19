@@ -39,6 +39,30 @@ jobs:
           name: Run Dagger pipeline
           command: dagger run --progress plain python ./ci/deploy.py
 
+  build-lambda:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - dagger-install
+      - run:
+          name: Run Dagger pipeline
+          command: dagger run --progress plain python ./ci/build-lambda.py
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - "*"
+  mostrar-directorio:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - run:
+          name: Mostrar directorio
+          command: |
+            dir
+      
   deploy-lambda:
     docker:
       - image: cimg/python:3.10
@@ -59,4 +83,10 @@ workflows:
       # - deploy:
       #     requires:
       #       - build
-      - deploy-lambda
+      - build-lambda
+      - mostrar-directorio
+          requires:
+            -build-lambda
+      # - deploy-lambda:
+      #   requires:
+      #     -build-lambda

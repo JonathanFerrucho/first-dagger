@@ -57,8 +57,8 @@ async def main():
             .from_("amazon/aws-cli:2.11.22")
             .with_secret_variable("AWS_ACCESS_KEY_ID", aws_access_key_id)
             .with_secret_variable("AWS_SECRET_ACCESS_KEY", aws_secret_access_key)
-            .with_env_variable("AWS_DEFAULT_REGION", aws_region)
             .with_secret_variable("AWS_SESSION_TOKEN", aws_session_token)
+            .with_env_variable("AWS_DEFAULT_REGION", aws_region)
         )
 
         # add zip archive to AWS CLI container
