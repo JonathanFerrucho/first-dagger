@@ -44,7 +44,7 @@ async def main():
             # .with_exec(
             #     ["pip", "install", "--target", "./packages", "-r", "requirements-dod.txt"]
             # )
-            .with_workdir("/lambda/packages")
+            # .with_workdir("/lambda/packages")
             .with_exec(["zip", "-r", "../function.zip", "."])
             .with_workdir("/lambda")
             .with_exec(["zip", "function.zip", "handler.py"])
