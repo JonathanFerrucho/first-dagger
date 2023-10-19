@@ -20,7 +20,7 @@ async def main():
             os.environ["AWS_SECRET_ACCESS_KEY"],
         )
 
-        aws_secret_access_key = client.set_secret(
+        aws_session_token = client.set_secret(
             "aws_session_token",
             os.environ["AWS_SESSION_TOKEN"],
         )
@@ -45,7 +45,7 @@ async def main():
             #     ["pip", "install", "--target", "./packages", "-r", "requirements-dod.txt"]
             # )
             # .with_workdir("/lambda/packages")
-            .with_exec(["zip", "-r", "../function.zip", "."])
+            .with_exec(["zip", "-r", "./function.zip", "."])
             .with_workdir("/lambda")
             .with_exec(["zip", "function.zip", "handler.py"])
         )
@@ -59,6 +59,7 @@ async def main():
             .with_secret_variable("AWS_ACCESS_KEY_ID", aws_access_key_id)
             .with_secret_variable("AWS_SECRET_ACCESS_KEY", aws_secret_access_key)
             .with_env_variable("AWS_DEFAULT_REGION", aws_region)
+            .with_secret_variable("AWS_SESSION_TOKEN", aws_session_token)
         )
 
         # add zip archive to AWS CLI container
