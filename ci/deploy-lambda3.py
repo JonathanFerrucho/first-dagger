@@ -5,48 +5,37 @@ import sys
 import anyio
 
 import dagger
+import boto3
 
-from constructs import Construct
-from aws_cdk import (
-    Stack,
-    aws_lambda as _lambda,
-)
 
 async def main():
     # initialize Dagger client
     async with dagger.Connection(dagger.Config(log_output=sys.stderr)) as client:
-        # set AWS credentials as client secrets
-        # aws_access_key_id = client.set_secret(
-        #     "aws_access_key_id",
-        #     os.environ["AWS_ACCESS_KEY_ID"],
-        # )
-        # aws_secret_access_key = client.set_secret(
-        #     "aws_secret_access_key",
-        #     os.environ["AWS_SECRET_ACCESS_KEY"],
-        # )
 
-        # aws_session_token = client.set_secret(
-        #     "aws_session_token",
-        #     os.environ["AWS_SESSION_TOKEN"],
-        # )
+        # get reference to function directory
+        lambda_dir = client.host().directory(".", include=["host"]).directory("host")
 
-        # aws_region = os.environ["AWS_DEFAULT_REGION"]
+        # use a node:18-alpine container
+        # mount the function directory
+        # at /src in the container
+        # install application dependencies
+        # create zip archive
+        build = (
+            client.container()
+            .from_("python:3.10-alpine")
+            .with_directory("/host", lambda_dir)
+        )
 
+        lambda_client = boto3.client('lambda')
 
-        # lambda_dir = client.host().directory(".", include=["host"]).directory("host")
-
-        # build = (
-        #     client.container()
-        #     .from_("python:3.10-alpine")
-        #     .with_directory("/host", lambda_dir)
-        # )
-
+        # add zip archive to AWS CLI container
+        # use CLI commands to deploy new zip archive
+        # and get function URL
+        # parse response and print URL
         response = await (
-            _lambda.Function(
-                self, 'create-jira-issue',
-                runtime=_lambda.Runtime.PYTHON_3_10,
-                code=_lambda.Code.from_asset('/lambda'),
-                handler='lambda.handler',
+            lambda_client.update_function_code(
+                FunctionName="create-jira-issue",
+                ZipFile= build.file("/host/function.zip")
             )
         )
         data = json.loads(response)
