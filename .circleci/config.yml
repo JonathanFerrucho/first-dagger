@@ -67,7 +67,7 @@ jobs:
       - dagger-install
       - run:
           name: Run Dagger pipeline
-          command: dagger run --progress plain python ./ci/deploy-lambda2.py
+          command: dagger run --progress plain python ./ci/deploy-lambda3.py
   
   print-a-message:
     docker:
