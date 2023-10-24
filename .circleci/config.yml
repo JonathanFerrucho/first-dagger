@@ -88,14 +88,10 @@ jobs:
 workflows:
   dagger:
     jobs:
-      # - build
-      # - deploy:
+      # - build-lambda
+      # - print-a-message:
       #     requires:
-      #       - build
-      - build-lambda
-      - print-a-message:
-          requires:
-            - build-lambda
-      - deploy-lambda:
-          requires:
-            - build-lambda
+      #       - build-lambda
+      - deploy-lambda
+          # requires:
+          #   - build-lambda
